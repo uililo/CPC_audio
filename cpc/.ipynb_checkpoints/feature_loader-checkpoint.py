@@ -143,6 +143,7 @@ def getAR(args):
         arNet = NoAr()
     else:
         from .model import CPCAR
+        print(args.nLevelsGRU)
         arNet = CPCAR(args.hiddenEncoder, args.hiddenGar,
                       args.samplingType == "sequential",
                       args.nLevelsGRU,
@@ -170,6 +171,8 @@ def loadModel(pathCheckpoints, gru_level=None, loadStateDict=True):
             if gru_level is not None:
                 setattr(locArgs, 'nLevelsGRU', gru_level)
                 # locArgs['NLevelsGRU'] = gru_level
+            print(gru_level)
+            print(locArgs.nLevelsGRU)
             encoderNet = getEncoder(locArgs)
             arNet = getAR(locArgs)
             m_ = CPCModel(encoderNet, arNet)
